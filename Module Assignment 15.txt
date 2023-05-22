@@ -1,0 +1,161 @@
+Question 1:
+
+You have a Laravel application with a form that submits user information using a POST request. Write the code to retrieve the 'name' input field value from the request and store it in a variable called $name.
+
+Answer 1:
+
+use Illuminate\Http\Request;
+
+// route method where the form is submitted
+public function store(Request $request)
+{
+    // Collect the 'name' input field value from the request
+    $name = $request->input('name');
+
+    // use the $name variable as needed
+    // ...
+}
+
+Question 2: 
+
+In your Laravel application, you want to retrieve the value of the 'User-Agent' header from the current request. Write the code to accomplish this and store the value in a variable called $userAgent.
+
+Answer 2:
+
+use Illuminate\http\Request;
+
+// route method where the form is submitted
+public function getUserAgent(Request $request)
+{
+    // collect the User-Agent header value from the request
+    $userAgent = $request->header('User-Agent');
+
+    // Use the $userAgent variable as needed
+    // ...
+}
+
+Question 3: 
+
+You are building an API endpoint in Laravel that accepts a GET request with a 'page' query parameter. Write the code to retrieve the value of the 'page' parameter from the current request and store it in a variable called $page. If the parameter is not present, set $page to null.
+
+Answer 3:
+
+use Illuminate\Http\Request;
+
+// route method where the form is submitted where you want to retrieve the 'page' query parameter
+public function getPage(Request $request)
+{
+    // Retrieve the value of the 'page' query parameter from the request
+    $page = $request->query('page', null);
+
+    // Use the $page variable as needed
+    // ...
+}
+
+
+Question 4: 
+
+Create a JSON response in Laravel with the following data:
+
+{
+
+    "message": "Success",
+
+    "data": {
+
+        "name": "John Doe",
+
+        "age": 25
+
+    }
+
+}
+
+Answer 4:
+
+use Illuminate\Http\JsonResponse;
+
+public function jsonResponse()
+{
+    $data = [
+        'message' => 'Success',
+        'data' => [
+            'name' => 'John Doe',
+            'age' => 25
+        ]
+    ];
+
+    return response()->json($data);
+}
+
+Question 5:
+
+You are implementing a file upload feature in your Laravel application. Write the code to handle a file upload named 'avatar' in the current request and store the uploaded file in the 'public/uploads' directory. Use the original filename for the uploaded file.
+
+Answer 5:
+
+use Illuminate\http\request;
+
+public function handleFileUpload(Request $request)
+{
+    if ($request->hasFile('avatar')) {
+        $file = $request->file('avatar');
+        $fileName = $file->getClientOriginalName();
+        $file->move('public/uploads', $fileName);
+        
+        // Further processing or storing the file path in the database, etc.
+        // ...
+    }
+}
+
+Question 6:
+
+Retrieve the value of the 'remember_token' cookie from the current request in Laravel and store it in a variable called $rememberToken. If the cookie is not present, set $rememberToken to null.
+
+Answer 6:
+
+use Illuminate\Http\request;
+
+// route method where the form is submitted where you want to retrieve the 'remember_token' cookie
+public function getRememberToken(Request $request)
+{
+    // Retrieve the value of the 'remember_token' cookie from the request
+    $rememberToken = $request->cookie('remember_token', null);
+
+    // Use the $rememberToken variable as needed
+    // ...
+}
+
+Question 7:
+
+Create a route in Laravel that handles a POST request to the '/submit' URL. Inside the route closure, retrieve the 'email' input parameter from the request and store it in a variable called $email. Return a JSON response with the following data:
+
+{
+
+    "success": true,
+
+    "message": "Form submitted successfully."
+
+}
+
+Answer 7:
+
+use Illuminate\http\request;
+use Illuminate\support\facades\route;
+use Illuminate\http\JsonResponse;
+
+Route::post('/submit', function (Request $request) {
+    // Retrieve the 'email' input parameter from the request
+    $email = $request->input('email');
+
+    // Process the email as needed
+    // ...
+
+    // Reback a JSON response
+    $response = [
+        'success' => true,
+        'message' => 'Form submitted successfully.'
+    ];
+
+    return new JsonResponse($response);
+});
